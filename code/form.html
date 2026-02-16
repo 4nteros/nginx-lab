@@ -46,12 +46,12 @@
 <div class="container">
     <h2>Регистрация студента</h2>
     
-    <form id="studentForm">
+    <form id="studentForm" action="process.php" method="POST">
         <label class="field-label">ФИО студента:</label>
         <input type="text" name="student_name" placeholder="Введите имя" required>
 
         <label class="field-label">Возраст:</label>
-        <input type="number" name="age" min="16" max="100" required>
+        <input type="number" name="age" max="100" required> <!--НЕ ЗАБЫТЬ ВЕРНУТЬ ПОТОМ МИН 16 (сделано для теста на красенький текст) -->
 
         <label class="field-label">Факультет:</label>
         <select name="faculty">
@@ -79,25 +79,8 @@
 
 <script>
     document.getElementById("studentForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-        let output = "<h4>Студент успешно зарегистрирован!</h4>";
-        
-        for (const [name, value] of formData.entries()) {
-            let displayName = name;
-            if (name === 'student_name') displayName = 'Имя';
-            if (name === 'age') displayName = 'Возраст';
-            if (name === 'faculty') displayName = 'Факультет';
-            if (name === 'education_type') displayName = 'Форма обучения';
-            if (name === 'agree') displayName = 'Согласие';
-
-            output += `<p><b>${displayName}:</b> ${value === 'on' ? 'Да' : value}</p>`;
-        }
-
-        const resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = output;
-        resultDiv.style.display = "block";
+        const username = document.querySelector("[name='student_name']").value;
+        alert("Вы ввели имя: " + username);
     });
 </script>
 
